@@ -1,0 +1,7 @@
+# BookGUI Configuration
+# Книги хранятся в папке plugins/BookGUI/books/
+
+settings:
+  debug: false
+  # Если true - книги открываются всем без проверки прав
+  bypass-permissions: false
