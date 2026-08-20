@@ -1,0 +1,26 @@
+name: BookGUI
+version: 1.0
+main: com.bookgui.BookGUI
+api-version: '1.21'
+description: Простой плагин для открытия GUI-книг игрокам
+author: Custom
+
+commands:
+  bookgui:
+    description: Открыть книгу игроку
+    usage: /bookgui <книга> [игрок]
+    aliases:
+      - rules
+      - info
+      - help-book
+
+permissions:
+  bookgui.open.self:
+    description: Открыть книгу для себя
+    default: true
+  bookgui.open.others:
+    description: Открыть книгу для другого игрока
+    default: op
+  bookgui.reload:
+    description: Перезагрузить плагин
+    default: op
