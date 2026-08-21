@@ -88,23 +88,24 @@ public class BookManager {
             return;
         }
 
-        // Используем WRITTEN_BOOK и BookMeta (а не WritableBookMeta)
         ItemStack bookItem = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) bookItem.getItemMeta();
 
-        meta.setTitle(Component.text(book.getTitle()));
-        meta.setAuthor(Component.text(book.getAuthor()));
+        // ИСПРАВЛЕНО: передаем обычный String, а не Component
+        meta.setTitle(book.getTitle());
+        meta.setAuthor(book.getAuthor());
 
         List<Component> components = new ArrayList<>();
         for (String page : book.getPages()) {
             try {
                 components.add(miniMessage.deserialize(page));
             } catch (Exception e) {
+                // Если MiniMessage не может распарсить, добавляем как обычный текст
                 components.add(Component.text(page));
             }
         }
         
-        // В Paper 1.20.5+ метод pages принимает Iterable<Component>
+        // В Paper 1.20.5+ метод pages принимает List<Component>
         meta.pages(components);
         bookItem.setItemMeta(meta);
 
