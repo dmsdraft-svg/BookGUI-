@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.WritableBookMeta;
+import org.bukkit.inventory.meta.BookMeta;
 
 import java.io.File;
 import java.util.*;
@@ -88,8 +88,9 @@ public class BookManager {
             return;
         }
 
+        // Используем WRITTEN_BOOK и BookMeta (а не WritableBookMeta)
         ItemStack bookItem = new ItemStack(Material.WRITTEN_BOOK);
-        WritableBookMeta meta = (WritableBookMeta) bookItem.getItemMeta();
+        BookMeta meta = (BookMeta) bookItem.getItemMeta();
 
         meta.setTitle(Component.text(book.getTitle()));
         meta.setAuthor(Component.text(book.getAuthor()));
@@ -102,6 +103,8 @@ public class BookManager {
                 components.add(Component.text(page));
             }
         }
+        
+        // В Paper 1.20.5+ метод pages принимает Iterable<Component>
         meta.pages(components);
         bookItem.setItemMeta(meta);
 
